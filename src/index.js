@@ -163,6 +163,12 @@ export function useI18n() {
     location.reload() // 重新加载页面
   })
   debugDiv.appendChild(debugSelect)
+  const closeButton = document.createElement('button')
+  closeButton.textContent = '关闭'
+  closeButton.addEventListener('click', () => {
+    debugDiv.style.display = 'none'
+  })
+  debugDiv.appendChild(closeButton)
   document.body.appendChild(debugDiv)
 
   return { t: customT, isI18nDebug, debugDiv }
