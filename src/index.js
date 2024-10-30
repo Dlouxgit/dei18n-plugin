@@ -182,5 +182,7 @@ export function getI18nPluginInstall(i18nInstance, messagesProvider, src, create
   messages = messagesProvider
   i18nPlatformSrc = src
   createI18n = createI18nFn
-  return app => i18nPlugin.install(app, i18nInstance)
+  return {
+    install: app => i18nPlugin.install(app, i18nInstance),
+  }
 }
