@@ -88,11 +88,6 @@ let messages
 
 let t
 
-let i18nCN
-let i18nTW
-let i18nEN
-let i18nJP
-
 let debugDiv
 
 export function useI18n() {
@@ -102,47 +97,6 @@ export function useI18n() {
   if (!t) {
     t = i18n.global.t
   }
-  if (!i18nCN) {
-    i18nCN = createI18n({
-      legacy: false,
-      locale: 'zh-CN',
-      fallbackLocale: 'zh-CN',
-      messages,
-      globalInjection: true,
-    })
-  }
-  if (!i18nTW) {
-    i18nTW = createI18n({
-      legacy: false,
-      locale: 'zh-TW',
-      fallbackLocale: 'zh-TW',
-      messages,
-      globalInjection: true,
-    })
-  }
-  if (!i18nEN) {
-    i18nEN = createI18n({
-      legacy: false,
-      locale: 'en-US',
-      fallbackLocale: 'en-US',
-      messages,
-      globalInjection: true,
-    })
-  }
-  if (!i18nJP) {
-    i18nJP = createI18n({
-      legacy: false,
-      locale: 'ja-JP',
-      fallbackLocale: 'ja-JP',
-      messages,
-      globalInjection: true,
-    })
-  }
-  const tCN = i18nCN.global.t
-  const tTW = i18nTW.global.t
-  const tEN = i18nEN.global.t
-  const tJP = i18nJP.global.t
-
   const customT = (key, ...args) => {
     let originalResult = t(key, ...args)
     if (isI18nDebug) {
@@ -152,10 +106,6 @@ export function useI18n() {
     I18N_MAP = {
       ...(I18N_MAP || {}),
       [originalResult]: {
-        zh_CN: tCN(key, ...args),
-        zh_TW: tTW(key, ...args),
-        en_US: tEN(key, ...args),
-        ja_JP: tJP(key, ...args),
         key,
       },
     }
