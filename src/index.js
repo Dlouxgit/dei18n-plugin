@@ -4,31 +4,6 @@ const isI18nDebug = JSON.parse(localStorage.getItem('isI18nDebug') || 'false')
 
 let I18N_MAP
 
-// 监听右键操作
-document.addEventListener('contextmenu', (event) => {
-  if (isI18nDebug) {
-    event.preventDefault() // 阻止默认的右键行为
-    const targetText = event.target?.textContent
-
-    // 使用正则表达式匹配所有以 ** 开头并以 && 结尾的文本
-    const regex = /(\*\*.*?&&)/g // 匹配 **key&& 的模式
-    const matches = []
-    let match
-
-    // 提取所有匹配的文本
-    while ((match = regex.exec(targetText)) !== null) {
-      matches.push(match[1].trim()) // 将匹配的键添加到数组中
-    }
-
-    const keys = matches.map((item) => {
-      return I18N_MAP[item]?.key
-    })
-    if (keys.length > 0 && keys.every(Boolean)) {
-      createIframe(keys) // 创建 iframe
-    }
-  }
-})
-
 let i18nPlatformSrc = ''
 
 function createIframe(keys) {
@@ -157,6 +132,30 @@ export function getI18nPluginInstall(i18nInstance, messagesProvider, src, create
   messages = messagesProvider
   i18nPlatformSrc = src
   createI18n = createI18nFn
+  // 监听右键操作
+  document.addEventListener('contextmenu', (event) => {
+    if (isI18nDebug) {
+      event.preventDefault() // 阻止默认的右键行为
+      const targetText = event.target?.textContent
+
+      // 使用正则表达式匹配所有以 ** 开头并以 && 结尾的文本
+      const regex = /(\*\*.*?&&)/g // 匹配 **key&& 的模式
+      const matches = []
+      let match
+
+      // 提取所有匹配的文本
+      while ((match = regex.exec(targetText)) !== null) {
+        matches.push(match[1].trim()) // 将匹配的键添加到数组中
+      }
+
+      const keys = matches.map((item) => {
+        return I18N_MAP[item]?.key
+      })
+      if (keys.length > 0 && keys.every(Boolean)) {
+        createIframe(keys) // 创建 iframe
+      }
+    }
+  })
   return {
     install: app => i18nPlugin.install(app, i18nInstance),
   }
