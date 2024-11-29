@@ -46,6 +46,9 @@
     "typecheck": "tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
+  "peerDependencies": {
+    "vue-i18n": "^9.8.0"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^3.3.2",
     "@antfu/ni": "^0.23.0",
