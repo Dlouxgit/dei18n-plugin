@@ -1,5 +1,3 @@
-import type VueI18n from 'vue-i18n'
+import type { useI18n as vueI18nUseI18n } from 'vue-i18n'
 
-declare module 'dei18n-plugin' {
-  export const useI18n: typeof VueI18n.useI18n
-}
+export declare const useI18n: typeof vueI18nUseI18n
